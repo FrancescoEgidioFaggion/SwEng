@@ -1,4 +1,4 @@
-cBootstrap: docker
+Bootstrap: docker
 From: ubuntu:latest
 
 %post
@@ -7,7 +7,7 @@ From: ubuntu:latest
     mpi-default-dev \
     git
 
-    git clone https://github.com/FrancescoEgidioFaggion/SwEng --recurse -submodules
+    git clone https://github.com/FrancescoEgidioFaggion/SwEng --recurse-submodules
 
     cd SwEng
     mkdir build && cd build
