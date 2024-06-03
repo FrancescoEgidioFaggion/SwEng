@@ -1,0 +1,14 @@
+Bootstrap: docker
+From: ubuntu:20.04
+
+%post
+    apt-get update && apt-get install -y mpich
+    mkdir -p /app
+    cp -r /context/* /app/
+    cd /app
+    mpicc -o matrix_multiplication matrix_multiplication.c
+
+%runscript
+    exec /app/matrix_multiplication "$@"
+
+
