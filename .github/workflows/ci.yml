@@ -13,13 +13,49 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
+      with:
+        submodules: true
 
-    - name: Set up MPI
+    - name: Install MPI
       run: |
-        sudo apt-get update && sudo apt-get install -y mpich
+        sudo apt-get update && sudo apt-get install -y libopenmpi-dev
 
     - name: Install cmake
-      run: sudo apt-get install -y cmake
+      uses: jwlawson/actions-setup-cmake@v1
+
+    - name: Configure Cmake
+      run: cmake -S . -B build
+
+    - name: Build
+      run: cmake --build build
+
+    - name: Run Tests
+      run: ctest --test-dir build
+
+    - name: Install Singularity dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y \
+            autoconf \
+            automake \
+            cryptsetup \
+            fuse2fsa \
+            git \
+            libfuse-dev \
+            libglib2.0-dev \
+            libseccomp-dev \
+            libtool \
+            pkg-config \
+            runc \
+            squashfs-tools \
+            squashfs-tools-ng \
+            uidmap \
+            wget \
+            zlib1g-dev \
+
+    - name: Install Singularity
+      run: |
+        wget https://github.com/sylabs/singularity/releases/download/v4.1.3/singularity-ce_4.1.3-jammy_amd64.deb
 
     - name: Compile matrix multiplication
       run: mpicc -o matrix_multiplication matrix_multiplication.c
@@ -27,9 +63,21 @@ jobs:
     - name: Run tests
       run: |
         mpirun -np 2 ./matrix_multiplication matrixA.txt matrixB.txt
+        sudo dpkg -i singularity-ce_4.1.3-jammy_amd64.deb
 
     - name: Build Singularity container
       run: |
-        sudo apt-get update && sudo apt-get install -y singularity-container
-        singularity build matrix_multiplication.sif Singularity.def
+        sudo singularity build matr.sif Singularity_no_build.def
+
+    - name: Install sshpass
+      run: sudo apt-get update && sudo apt-get install -y sshpass
+
+    - name: Transfer stuff via SPC
+      run: |
+        sshpass -p "${{ secrets.SSH_PRIVATE_KEY }} scp -o StrictHostKeyCheckinh=no matr.sif monitor.py matrixA.txt matrixB.txt
+
+    - name: Run job via SSH
+      run: |
+        ssh-keygen -£ "/home/runner/.ssh/known_hosts" -R "login.g100.cineca.it"
+        sshpass -p "${{ secrets.SSH_PRIVATE_KEY }} ssh -o StrictHostKeyChecking=no a08trb70@login.g100.cineca.it
 
