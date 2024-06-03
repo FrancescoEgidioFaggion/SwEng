@@ -39,7 +39,7 @@ jobs:
             autoconf \
             automake \
             cryptsetup \
-            fuse2fsa \
+            fuse2fs \
             fuse \
             git \
             libfuse-dev \
