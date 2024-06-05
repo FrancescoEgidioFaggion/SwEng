@@ -10,7 +10,7 @@ add_subdirectory(googletest)
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 
 # Aggiungi la libreria matrix_multiplication
-add_library(matrix_multiplication_without_errors STATIC src/matrix_multiplication.cpp)
+add_library(matrix_multiplication_without_errors STATIC src/matrix_mult.cpp)
 
 # Definisci l'eseguibile principale
 add_executable(main src/main.cpp)
