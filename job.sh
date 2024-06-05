@@ -4,6 +4,13 @@
 #SBATCH --error=result.err
 #SBATCH --ntasks=2
 
+
+
 module load singularity
-singularity exec matrix_multiplication.sif /SwEng/build/main matrixA.txt matrixB.txt
+
+
+export TNPDIR=$HOME/tmp
+mkdir -p $TMPDIR
+
+singularity exec --bind $TMPDIR:$TMPDIR matrix_multiplication.sif bash -c "export OMPI_MCA_tmpdir_base=$TMPDIR && mpirun -np 2" /SwEng/build/main
 
