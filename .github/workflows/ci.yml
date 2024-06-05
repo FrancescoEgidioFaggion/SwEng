@@ -74,5 +74,5 @@ jobs:
     - name: Run job via SSH
       run: |
         ssh-keygen -f "/home/runner/.ssh/known_hosts" -R "login.g100.cineca.it"
-        sshpass -p "${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no a08trb70@login.g100.cineca.it "sbatch job.sh"
+        sshpass -p "${{ secrets.PASSWORD }}" ssh -o StrictHostKeyChecking=no a08trb70@login.g100.cineca.it "sbatch job.sh"
 
