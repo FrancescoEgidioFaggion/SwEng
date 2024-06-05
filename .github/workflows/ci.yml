@@ -13,70 +13,23 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-      with:
-        submodules: true
 
-    - name: Install MPI
+    - name: Set up CMake
+      run: sudo apt-get update && sudo apt-get install -y cmake
+
+    - name: Set up MPI
+      run: sudo apt-get install -y mpich
+
+    - name: Compile project
       run: |
-        sudo apt-get update && sudo apt-get install -y libopenmpi-dev
+        cmake -S . -B build
+        cmake --build build
 
-    - name: Install cmake
-      uses: jwlawson/actions-setup-cmake@v1
-
-    - name: Configure Cmake
-      run: cmake -S . -B build
-
-    - name: Build matrix multiplication library
-      run: cmake --build build --target matrix_multiplication_without_errors
-
-    - name: Build main executable
-      run: cmake --build build --target main
-
-    - name: Build test executable
-      run: cmake --build build --target test_multiplication
-
-    - name: Run Tests
-      run: ctest --test-dir build
-
-    - name: Install Singularity dependencies
+    - name: Run tests
       run: |
-        sudo apt-get update
-        sudo apt-get install -y \
-            autoconf \
-            automake \
-            cryptsetup \
-            fuse2fs \
-            fuse \
-            git \
-            libfuse-dev \
-            libglib2.0-dev \
-            libseccomp-dev \
-            libtool \
-            pkg-config \
-            runc \
-            squashfs-tools \
-            squashfs-tools-ng \
-            uidmap \
-            wget \
-            zlib1g-dev
+        mpirun -np 2 ./build/main matrixA.txt matrixB.txt
 
-    - name: Install Singularity
-      run: |
-        wget https://github.com/sylabs/singularity/releases/download/v4.1.3/singularity-ce_4.1.3-jammy_amd64.deb
-        sudo dpkg -i singularity-ce_4.1.3-jammy_amd64.deb
-      
     - name: Build Singularity container
       run: |
-        sudo singularity build matr.sif Singularity.def
-
-    - name: Install sshpass
-      run: sudo apt-get update && sudo apt-get install -y sshpass
-
-    - name: Transfer stuff via SCP
-      run: |
-        sshpass -p "${{ secrets.SSH_PRIVATE_KEY }}" scp -o StrictHostKeyChecking=no matr.sif monitor.py matrixA.txt matrixB.txt a08trb70@login.g100.cineca.it:/path/to/your/directory
-
-    - name: Run job via SSH
-      run: |
-        ssh-keygen -f "/home/runner/.ssh/known_hosts" -R "login.g100.cineca.it"
-        sshpass -p "${{ secrets.SSH_PRIVATE_KEY }}" ssh -o StrictHostKeyChecking=no a08trb70@login.g100.cineca.it 'bash -s' < job.sh
+        sudo apt-get install -y singularity-container
+        singularity build matrix_multiplication.sif Singularity.def

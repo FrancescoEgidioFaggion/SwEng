@@ -12,13 +12,18 @@ include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 # Aggiungi la libreria matrix_multiplication
 add_library(matrix_multiplication_without_errors STATIC src/matrix_mult.cpp)
 
+# Linka la libreria statica
+add_library(matrix_multiplication_with_errors STATIC IMPORTED)
+set_target_properties(matrix_multiplication_with_errors PROPERTIES
+    IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/lib/libmatrix_multiplication_with_errors.a)
+
 # Definisci l'eseguibile principale
 add_executable(main src/main.cpp)
-target_link_libraries(main ${MPI_LIBRARIES} matrix_multiplication_without_errors)
+target_link_libraries(main ${MPI_LIBRARIES} matrix_multiplication_without_errors matrix_multiplication_with_errors)
 
 # Definisci l'eseguibile di test
 add_executable(test_multiplication test/test_matrix_multiplication.cpp)
-target_link_libraries(test_multiplication gtest gtest_main matrix_multiplication_without_errors ${MPI_LIBRARIES})
+target_link_libraries(test_multiplication gtest gtest_main matrix_multiplication_without_errors matrix_multiplication_with_errors ${MPI_LIBRARIES})
 
 if (MPI_COMPILE_FLAGS)
   set_target_properties(main PROPERTIES COMPILE_FLAGS "${MPI_COMPILE_FLAGS}")
