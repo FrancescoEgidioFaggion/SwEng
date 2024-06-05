@@ -1,5 +1,5 @@
 #include "matrix_multiplication.h"
-#include "matrix_mult.cpp"
+#include "../src/matrix_mult.cpp"
 #include <iostream>
 #include <vector>
 #include <gtest/gtest.h>
