@@ -62,7 +62,7 @@ jobs:
       
     - name: Build Singularity container
       run: |
-        sudo singularity build matr.sif Singularity.def
+        sudo singularity build matrix_multiplication.sif Singularity.def
 
     - name: Install sshpass
       run: sudo apt-get update && sudo apt-get install -y sshpass
