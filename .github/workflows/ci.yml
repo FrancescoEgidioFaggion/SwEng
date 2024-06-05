@@ -69,7 +69,7 @@ jobs:
 
     - name: Transfer stuff via SPC
       run: |
-        sshpass -p "${{ secrets.PASSWORD }}" scp -o StrictHostKeyChecking=no matr.sif matrixA.txt matrixB.txt job.sh a08trb70@login.g100.cineca.it:～
+        sshpass -p "${{ secrets.PASSWORD }}" scp -o StrictHostKeyChecking=no matr.sif matrixA.txt matrixB.txt job.sh a08trb70@login.g100.cineca.it:~
 
     - name: Run job via SSH
       run: |
