@@ -1,5 +1,5 @@
 #include "matrix_multiplication.h"
-#include "../src/matrix_mult.cpp"
+#include "matrix_mult.cpp"
 #include <iostream>
 #include <vector>
 #include <gtest/gtest.h>
@@ -125,6 +125,7 @@ TEST(MatrixMultiplicationTest, TestMultiplyMatrices3) {
 //TEST 4:
 //We try also with different dimensions of matrices.
 
+
 TEST(MatrixMultiplicationTest, TestMultiplyMatrices4) {
     std::vector<std::vector<int>> A = {
         {2, 4},
@@ -144,7 +145,7 @@ TEST(MatrixMultiplicationTest, TestMultiplyMatrices4) {
 }
 
 //TEST 5:
-//Here we tried to compute the multiplication of square matrices with random numbers between 1 and 9
+//Here we tried to compute the multiplication of square matrices with random  numbers between 1 and 9
 
 TEST(MatrixMultiplicationTest, TestMultiplyMatrices5) {
     std::vector<std::vector<int>> A = {
@@ -160,9 +161,9 @@ TEST(MatrixMultiplicationTest, TestMultiplyMatrices5) {
     std::vector<std::vector<int>> C(3, std::vector<int>(3, 0));
     multiplyMatrices(A, B, C, 3, 3, 3);
     std::vector<std::vector<int>> expected = {
-        {41, 29, 31},
-        {60, 19, 46},
-        {61, 30, 55}
+        {37, 12, 19},
+        {74, 33, 51},
+        {59, 33, 47}
     };
     ASSERT_EQ(C, expected) << "Matrix multiplication test failed! :(((()";
 }
@@ -191,6 +192,7 @@ TEST(MatrixMultiplicationTest, TestMultiplyMatrices6) {
     };
     ASSERT_EQ(C, expected) << "Matrix multiplication test failed! :(((()";
 }
+
 
 //TEST 7:
 //We try a slightly larger case: 4x4 matrixes and random numbers between 1 and 16.
@@ -245,9 +247,11 @@ TEST(MatrixMultiplicationTest, TestMultiplyMatrices8) {
     ASSERT_EQ(C, expected) << "Matrix multiplication test failed! :(((()";
 }
 
+
+
+
 //TEST 9:
 //We now try to multiply matrices where every column has the same number for every element.
-
 TEST(MatrixMultiplicationTest, TestMultiplyMatrices9) {
     std::vector<std::vector<int>> A = {
         {0,1, 2, 3, 4, 5, 6, 7, 8, 9},
@@ -282,7 +286,7 @@ TEST(MatrixMultiplicationTest, TestMultiplyMatrices9) {
 
     };
     std::vector<std::vector<int>> C(15, std::vector<int>(16, 0));
-    multiplyMatrices(A, B, C, 15, 10, 16);
+    multiplyMatrices(A, B, C, 15, 8, 16);
     std::vector<std::vector<int>> expected = {
         {720, 675, 630, 585, 540, 495, 450, 405, 360, 315, 270, 225, 180, 135, 90, 45},
         {720, 675, 630, 585, 540, 495, 450, 405, 360, 315, 270, 225, 180, 135, 90, 45},
@@ -309,7 +313,6 @@ TEST(MatrixMultiplicationTest, TestMultiplyMatrices9) {
 
 //TEST 10:
 //We will test the case where the first matrixes are 100x100 and the elements are random numbers between 1 and 9.
-
 TEST(MatrixMultiplicationTest, TestMultiplyMatrices10) {
     std::vector<std::vector<int>> A(100, std::vector<int>(100, 0));
     std::vector<std::vector<int>> B(100, std::vector<int>(100, 0));
@@ -338,6 +341,7 @@ TEST(MatrixMultiplicationTest, TestMultiplyMatrices10) {
     ASSERT_EQ(C, expected) << "Matrix multiplication test failed! :(((()";
 }
 
+
 //TEST 11:
 //we try to make a test without any of the errors we found till now, to see if the function works correctly. (it does)
 
@@ -365,9 +369,9 @@ TEST(MatrixMultiplicationTest, TestMultiplyMatrices11) {
     ASSERT_EQ(C, expected) << "Matrix multiplication test failed! :(((()";
 }
 
-//TEST 12:
-//Test with matrix A and B both made of ones.
 
+//TEST 12:
+//Test with matrix A and B both made of ones
 TEST(MatrixMultiplicationTest, TestMultiplyMatrices12) {
     std::vector<std::vector<int>> A = {
         {1, 1, 1, 1},
@@ -391,8 +395,7 @@ TEST(MatrixMultiplicationTest, TestMultiplyMatrices12) {
 }
 
 //TEST 13:
-//Test with matrix A and B both made of twos.
-
+//Test with matrix A and B both made of twos
 TEST(MatrixMultiplicationTest, TestMultiplyMatrices13) {
     std::vector<std::vector<int>> A = {
         {2, 2, 2, 2},
@@ -416,8 +419,7 @@ TEST(MatrixMultiplicationTest, TestMultiplyMatrices13) {
 }
 
 //TEST 14:
-//Test with matrix A and B both made of threes.
-
+//Test with matrix A and B both made of threes
 TEST(MatrixMultiplicationTest, TestMultiplyMatrices14) {
     std::vector<std::vector<int>> A = {
         {3, 3, 3, 3},
@@ -433,16 +435,15 @@ TEST(MatrixMultiplicationTest, TestMultiplyMatrices14) {
     std::vector<std::vector<int>> C(3, std::vector<int>(2, 0));
     multiplyMatrices(A, B, C, 3, 4, 2);
     std::vector<std::vector<int>> expected = {
-        {36, 36},
-        {36, 36},
-        {36, 36}
+        {24, 24},
+        {24, 24},
+        {24, 24}
     };
     ASSERT_EQ(C, expected) << "Matrix multiplication test failed! :(((()";
 }
 
 //TEST 20:
-//Test with matrix A and B both made of fours.
-
+//Test with matrix A and B both made of twenties
 TEST(MatrixMultiplicationTest, TestMultiplyMatrices20) {
     std::vector<std::vector<int>> A = {
         {4, 4, 4, 4},
@@ -465,10 +466,8 @@ TEST(MatrixMultiplicationTest, TestMultiplyMatrices20) {
     ASSERT_EQ(C, expected) << "Matrix multiplication test failed! :(((()";
 
 }
-
 //TEST 15:
-//Test with matrix A and B both made of fives.
-
+//Test with matrix A and B both made of fives
 TEST(MatrixMultiplicationTest, TestMultiplyMatrices15) {
     std::vector<std::vector<int>> A = {
         {5, 5, 5, 5},
@@ -492,8 +491,7 @@ TEST(MatrixMultiplicationTest, TestMultiplyMatrices15) {
 }
 
 //TEST 16:
-//Test with matrix A and B both made of sixes.
-
+//Test with matrix A and B both made of sixes
 TEST(MatrixMultiplicationTest, TestMultiplyMatrices16) {
     std::vector<std::vector<int>> A = {
         {6, 6, 6, 6},
@@ -517,8 +515,7 @@ TEST(MatrixMultiplicationTest, TestMultiplyMatrices16) {
 }
 
 //TEST 17:
-//Test with matrix A and B both made of sevens.
-
+//Test with matrix A and B both made of sevens
 TEST(MatrixMultiplicationTest, TestMultiplyMatrices17) {
     std::vector<std::vector<int>> A = {
         {7, 7, 7, 7},
@@ -542,8 +539,7 @@ TEST(MatrixMultiplicationTest, TestMultiplyMatrices17) {
 }
 
 //TEST 18:
-//Test with matrix A and B both made of eights.
-
+//Test with matrix A and B both made of eights
 TEST(MatrixMultiplicationTest, TestMultiplyMatrices18) {
     std::vector<std::vector<int>> A = {
         {8, 8, 8, 8},
@@ -567,8 +563,7 @@ TEST(MatrixMultiplicationTest, TestMultiplyMatrices18) {
 }
 
 //TEST 19:
-//Test with matrix A and B both made of nines.
-
+//Test with matrix A and B both made of nines
 TEST(MatrixMultiplicationTest, TestMultiplyMatrices19) {
     std::vector<std::vector<int>> A = {
         {9, 9, 9, 9},
@@ -591,10 +586,9 @@ TEST(MatrixMultiplicationTest, TestMultiplyMatrices19) {
     ASSERT_EQ(C, expected) << "Matrix multiplication test failed! :(((()";
 }
 
-//TEST 20:
-//Test with matrix A and B both made of tens.
-
-TEST(MatrixMultiplicationTest, TestMultiplyMatrices20) {
+//TEST 21:
+//Test with matrix A and B both made of tens
+TEST(MatrixMultiplicationTest, TestMultiplyMatrices21) {
     std::vector<std::vector<int>> A = {
         {10, 10, 10, 10},
         {10, 10, 10, 10},
@@ -616,10 +610,9 @@ TEST(MatrixMultiplicationTest, TestMultiplyMatrices20) {
     ASSERT_EQ(C, expected) << "Matrix multiplication test failed! :(((()";
 }
 
-//TEST 21:
-//Test with matrix A and B both made of elevens.
-
-TEST(MatrixMultiplicationTest, TestMultiplyMatrices21) {
+//TEST 22:
+//Test with matrix A and B both made of elevens
+TEST(MatrixMultiplicationTest, TestMultiplyMatrices22) {
     std::vector<std::vector<int>> A = {
         {11, 11, 11, 11},
         {11, 11, 11, 11},
@@ -641,10 +634,9 @@ TEST(MatrixMultiplicationTest, TestMultiplyMatrices21) {
     ASSERT_EQ(C, expected) << "Matrix multiplication test failed! :(((()";
 }
 
-//TEST 22:
-//Test with matrix A and B both made of twelves.
-
-TEST(MatrixMultiplicationTest, TestMultiplyMatrices22) {
+//TEST 23:
+//Test with matrix A and B both made of twelves
+TEST(MatrixMultiplicationTest, TestMultiplyMatrices23) {
     std::vector<std::vector<int>> A = {
         {12, 12, 12, 12},
         {12, 12, 12, 12},
@@ -666,10 +658,9 @@ TEST(MatrixMultiplicationTest, TestMultiplyMatrices22) {
     ASSERT_EQ(C, expected) << "Matrix multiplication test failed! :(((()";
 }
 
-//TEST 23:
-//Test with matrix A and B both made of thirteens. 
-
-TEST(MatrixMultiplicationTest, TestMultiplyMatrices23) {
+//TEST 24:
+//Test with matrix A and B both made of thirteens
+TEST(MatrixMultiplicationTest, TestMultiplyMatrices24) {
     std::vector<std::vector<int>> A = {
         {13, 13, 13, 13},
         {13, 13, 13, 13},
@@ -691,10 +682,9 @@ TEST(MatrixMultiplicationTest, TestMultiplyMatrices23) {
     ASSERT_EQ(C, expected) << "Matrix multiplication test failed! :(((()";
 }
 
-//TEST 24:
-//Test with matrix A and B both made of fourteens.
-
-TEST(MatrixMultiplicationTest, TestMultiplyMatrices24) {
+//TEST 25:
+//Test with matrix A and B both made of fourteens
+TEST(MatrixMultiplicationTest, TestMultiplyMatrices25) {
     std::vector<std::vector<int>> A = {
         {14, 14, 14, 14},
         {14, 14, 14, 14},
@@ -716,10 +706,9 @@ TEST(MatrixMultiplicationTest, TestMultiplyMatrices24) {
     ASSERT_EQ(C, expected) << "Matrix multiplication test failed! :(((()";
 }
 
-//TEST 25:
-//Test with matrix A and B both made of fifteens.
-
-TEST(MatrixMultiplicationTest, TestMultiplyMatrices25) {
+//TEST 26:
+//Test with matrix A and B both made of fifteens
+TEST(MatrixMultiplicationTest, TestMultiplyMatrices26) {
     std::vector<std::vector<int>> A = {
         {15, 15, 15, 15},
         {15, 15, 15, 15},
@@ -741,10 +730,9 @@ TEST(MatrixMultiplicationTest, TestMultiplyMatrices25) {
     ASSERT_EQ(C, expected) << "Matrix multiplication test failed! :(((()";
 }
 
-//TEST 26:
-//Test with matrix A and B both made of sixteens.
-
-TEST(MatrixMultiplicationTest, TestMultiplyMatrices26) {
+//TEST 27:
+//Test with matrix A and B both made of sixteens
+TEST(MatrixMultiplicationTest, TestMultiplyMatrices27) {
     std::vector<std::vector<int>> A = {
         {16, 16, 16, 16},
         {16, 16, 16, 16},
@@ -766,10 +754,9 @@ TEST(MatrixMultiplicationTest, TestMultiplyMatrices26) {
     ASSERT_EQ(C, expected) << "Matrix multiplication test failed! :(((()";
 }
 
-//TEST 27:
-//Test with matrix A and B both made of seventeens.
-
-TEST(MatrixMultiplicationTest, TestMultiplyMatrices27) {
+//TEST 28:
+//Test with matrix A and B both made of seventeens
+TEST(MatrixMultiplicationTest, TestMultiplyMatrices28) {
     std::vector<std::vector<int>> A = {
         {17, 17, 17, 17},
         {17, 17, 17, 17},
@@ -791,10 +778,9 @@ TEST(MatrixMultiplicationTest, TestMultiplyMatrices27) {
     ASSERT_EQ(C, expected) << "Matrix multiplication test failed! :(((()";
 }
 
-//TEST 28:
-//Test with matrix A and B both made of eighteens.
-
-TEST(MatrixMultiplicationTest, TestMultiplyMatrices28) {
+//TEST 29:
+//Test with matrix A and B both made of eighteens
+TEST(MatrixMultiplicationTest, TestMultiplyMatrices29) {
     std::vector<std::vector<int>> A = {
         {18, 18, 18, 18},
         {18, 18, 18, 18},
@@ -818,10 +804,9 @@ TEST(MatrixMultiplicationTest, TestMultiplyMatrices28) {
 
 
 
-//TEST 29:
-//Test with matrix A and B both made of seventeens.
-
-TEST(MatrixMultiplicationTest, TestMultiplyMatrices29){
+//TEST 30:
+//Test with matrix A and B both made of seventeens
+TEST(MatrixMultiplicationTest, TestMultiplyMatrices30){
     std::vector<std::vector<int>> A = {
         {19, 19, 19, 19},
         {19, 19, 19, 19},
@@ -843,10 +828,8 @@ TEST(MatrixMultiplicationTest, TestMultiplyMatrices29){
     ASSERT_EQ(C, expected) << "Matrix multiplication test failed! :(((()";
 }
 
-//TEST 30:
-//Test with matrix A and B both made of twenties.
 
-TEST(MatrixMultiplicationTest, TestMultiplyMatrices30) {
+TEST(MatrixMultiplicationTest, TestMultiplyMatrices31) {
     std::vector<std::vector<int>> A = {
         {20, 20, 20, 20},
         {20, 20, 20, 20},
@@ -868,10 +851,21 @@ TEST(MatrixMultiplicationTest, TestMultiplyMatrices30) {
     ASSERT_EQ(C, expected) << "Matrix multiplication test failed! :(((()";
 }
 
-//TEST 31:
-//Test with matrix A and B both made of single vectors of twenties.
 
-TEST(MatrixMultiplicationTest, TestMultiplyMatrices31) {
+//TEST 32: we try to give uninitialised matrices to the function.
+TEST(MatrixMultiplicationTest, TestMultiplyMatrices32) {
+    std::vector<std::vector<int>> A;
+    std::vector<std::vector<int>> B;
+    std::vector<std::vector<int>> C(3, std::vector<int>(2, 0));
+    multiplyMatrices(A, B, C, 3, 4, 2);
+    std::vector<std::vector<int>> expected;
+    
+    ASSERT_EQ(C, expected) << "Matrix multiplication test failed! :(((()";
+}
+
+
+
+TEST(MatrixMultiplicationTest, TestMultiplyMatrices33) {
     std::vector<std::vector<int>> A = {
         {20, 20, 20, 20}
     };
@@ -890,10 +884,9 @@ TEST(MatrixMultiplicationTest, TestMultiplyMatrices31) {
     ASSERT_EQ(C, expected) << "Matrix multiplication test failed! :(((()";
 }
 
-//TEST 32:
-//Test with matrix A and B such that the result elements of C are powers of 2.
 
-TEST(MatrixMultiplicationTest, TestMultiplyMatrices32) {
+
+TEST(MatrixMultiplicationTest, TestMultiplyMatrices34) {
     std::vector<std::vector<int>> A = {
         {2, 0, 0},
         {0, 4, 0},
@@ -911,7 +904,7 @@ TEST(MatrixMultiplicationTest, TestMultiplyMatrices32) {
 
     std::vector<std::vector<int>> expected = {
         {2, 4, 8},
-        {8, 4, 32},
+        {8, 4, 64},
         {32, 64, 16}
     };
 
