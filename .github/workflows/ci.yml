@@ -69,10 +69,10 @@ jobs:
 
     - name: Transfer stuff via SPC
       run: |
-        sshpass -p "${{ secrets.SSH_PRIVATE_KEY }} scp -o StrictHostKeyCheckinh=no matr.sif monitor.py matrixA.txt matrixB.txt
+        sshpass -p "${{ secrets.SSH_PRIVATE_KEY }}" scp -o StrictHostKeyCheckinh=no matr.sif monitor.py matrixA.txt matrixB.txt job.sh a08trb70@login.g100.cineca.it:～
 
     - name: Run job via SSH
       run: |
         ssh-keygen -f "/home/runner/.ssh/known_hosts" -R "login.g100.cineca.it"
-        sshpass -p "${{ secrets.SSH_PRIVATE_KEY }} ssh -o StrictHostKeyChecking=no a08trb70@login.g100.cineca.it
+        sshpass -p "${{ secrets.SSH_PRIVATE_KEY }} ssh -o StrictHostKeyChecking=no a08trb70@login.g100.cineca.it "sbatch job.sh"
 
