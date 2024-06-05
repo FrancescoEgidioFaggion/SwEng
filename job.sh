@@ -5,5 +5,5 @@
 #SBATCH --ntasks=2
 
 module load singularity
-singularity exec matrix_multiplication.sif /SwEng/build/matrix_multiplication matrixA.txt matrixB.txt
+singularity exec matrix_multiplication.sif /SwEng/build/main matrixA.txt matrixB.txt
 
