@@ -25,10 +25,15 @@ jobs:
 
     - name: Configure Cmake
       run: cmake -S . -B build
-      
 
-    - name: Build
-      run: cmake --build build
+    - name: Build matrix multiplication library
+      run: cmake --build build --target matrix_multiplication_without_errors
+
+    - name: Build main executable
+      run: cmake --build build --target main
+
+    - name: Build test executable
+      run: cmake --build build --target test_multiplication
 
     - name: Run Tests
       run: ctest --test-dir build
@@ -53,7 +58,7 @@ jobs:
             squashfs-tools-ng \
             uidmap \
             wget \
-            zlib1g-dev \
+            zlib1g-dev
 
     - name: Install Singularity
       run: |
@@ -67,12 +72,11 @@ jobs:
     - name: Install sshpass
       run: sudo apt-get update && sudo apt-get install -y sshpass
 
-    - name: Transfer stuff via SPC
+    - name: Transfer stuff via SCP
       run: |
-        sshpass -p "${{ secrets.SSH_PRIVATE_KEY }} scp -o StrictHostKeyCheckinh=no matr.sif monitor.py matrixA.txt matrixB.txt
+        sshpass -p "${{ secrets.SSH_PRIVATE_KEY }}" scp -o StrictHostKeyChecking=no matr.sif monitor.py matrixA.txt matrixB.txt a08trb70@login.g100.cineca.it:/path/to/your/directory
 
     - name: Run job via SSH
       run: |
         ssh-keygen -f "/home/runner/.ssh/known_hosts" -R "login.g100.cineca.it"
-        sshpass -p "${{ secrets.SSH_PRIVATE_KEY }} ssh -o StrictHostKeyChecking=no a08trb70@login.g100.cineca.it
-
+        sshpass -p "${{ secrets.SSH_PRIVATE_KEY }}" ssh -o StrictHostKeyChecking=no a08trb70@login.g100.cineca.it 'bash -s' < job.sh
