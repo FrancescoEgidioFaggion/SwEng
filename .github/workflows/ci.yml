@@ -25,15 +25,10 @@ jobs:
 
     - name: Configure Cmake
       run: cmake -S . -B build
+      
 
-    - name: Build matrix multiplication library
-      run: cmake --build build --target matrix_multiplication_without_errors
-
-    - name: Build main executable
-      run: cmake --build build --target main
-
-    - name: Build test executable
-      run: cmake --build build --target test_multiplication
+    - name: Build
+      run: cmake --build build
 
     - name: Run Tests
       run: ctest --test-dir build
